@@ -1,0 +1,35 @@
+name: Reef Mint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [closed]
+
+jobs:
+  mint-badge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Mint Badge
+        run: |
+          echo "Minting badge for ${{ github.actor }}"
+          echo "Artifact: ${{ github.sha }}" >> splash.log
+          echo "Badge: Reef Mint" >> splash.log
+
+      - name: Commit & Push splash.log
+        run: |
+          git config --global user.name 'reef-bot'
+          git config --global user.email 'reef-bot@reef.local'
+          git add splash.log
+          git commit -m "Reef Mint badge logged"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
