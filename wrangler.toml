@@ -1,0 +1,9 @@
+name = "mute-flower-02bc"
+type = "javascript"
+account_id = "your-cloudflare-account-id"
+workers_dev = true
+compatibility_date = "2025-12-08"
+
+kv_namespaces = [
+  { binding = "WHALETRUCKER_REEF_KV", id = "95d133e1ead4aac9cfa649120564f1e" }
+]
