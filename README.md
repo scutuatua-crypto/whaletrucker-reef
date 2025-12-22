@@ -1,16 +1,16 @@
+## 🎯 DeFi Yields Calculator
+Calculate passive income from DeFi protocols
+
 # 🐋 Badge: Identity Migration Recorded
 
 From: Scutua (banned)  
-To: scututaua-crypto via czonedive-core  
+To: scutuatua-crypto via czonedive-core  
 Effect: Legacy preserved, WhaleTrucker remixed  
 Status: Memory locked
 
 ## 🐋 Boss WhaleTrucker • Reef Legacy Minted
-Identity: scututaua-crypto  
+Identity: scutuatua-crypto  
 YES Vote • Reef Archive Active
-
-## 🎯 DeFi Yields Calculator
-Calculate passive income from DeFi protocols
 
 # Reef Map
 
