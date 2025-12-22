@@ -9,6 +9,8 @@ Status: Memory locked
 Identity: scututaua-crypto  
 YES Vote • Reef Archive Active
 
+## 🎯 DeFi Yields Calculator
+Calculate passive income from DeFi protocols
 
 # Reef Map
 
