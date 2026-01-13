@@ -1,0 +1,14 @@
+name: Run Audit
+on: workflow_dispatch
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run GH Script
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh repo list scutuatua-crypto --limit 100 --json name,url,visibility,defaultBranchRef > audit-report.json
+          echo "---------- COPY CONTENT BELOW ----------"
+          cat audit-report.json
+          echo "---------- END OF CONTENT ----------"
