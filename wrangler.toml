@@ -1,6 +1,6 @@
-name = "mute-flower-02bc"
+name = "whaletrucker-reef"
 type = "javascript"
-account_id = "your-cloudflare-account-id"
+account_id = "1bbd219c23dd03cc764c159bfe42e649"
 workers_dev = true
 compatibility_date = "2025-12-08"
 
