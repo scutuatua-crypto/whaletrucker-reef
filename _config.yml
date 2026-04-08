@@ -1,0 +1,26 @@
+title: WhaleTrucker-Reef
+description: DeFi Yields Tracker — Trucking to the Moon 🚚
+baseurl: "/whaletrucker-reef"
+url: "https://scutuatua-crypto.github.io"
+
+# Exclude files that aren't part of the site
+exclude:
+  - wrangler.toml
+  - "*.log"
+  - "*.log.md"
+  - README.md
+  - LICENSE
+  - badge-history.md
+  - governance-flow.md
+  - multi-reef-index.md
+  - notification-flow.md
+  - proxy-migration.md
+  - recover-flow.md
+  - reef-compass.md
+  - reef-flow.md
+  - staking-flow.md
+  - splash.log
+  - splash.log.md
+
+# GitHub Pages settings
+theme: minima
