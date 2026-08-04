@@ -1,12 +1,8 @@
-name: Deploy to Cloudflare Workers
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'src/**'
-      - 'wrangler.toml'
-      - '.github/workflows/deploy-workers.yml'
   workflow_dispatch: {}
 
 jobs:
@@ -21,9 +17,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Deploy to Cloudflare Workers (with retry)
+      - name: Deploy to Cloudflare Pages (with retry)
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |
           set -euo pipefail
           attempts=0
@@ -32,7 +29,7 @@ jobs:
           until [ "$attempts" -ge "$max_attempts" ]; do
             attempts=$((attempts+1))
             echo "Deploy attempt: $attempts"
-            if npx wrangler publish --env production; then
+            if npx wrangler pages deploy . --project-name=whaletrucker-reef; then
               echo "Deploy succeeded"
               break
             fi
