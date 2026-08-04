@@ -1,30 +1,47 @@
-  - name: Setup Node
-    uses: actions/setup-node@v3
-    with:
-      node-version: '18'
+name: Deploy to Cloudflare Workers
 
-  - name: Deploy to Cloudflare Workers (with retry)
-    env:
-      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-    run: |
-      set -euo pipefail
-      attempts=0
-      max_attempts=3
-      delay=5
-      until [ "$attempts" -ge "$max_attempts" ]; do
-        attempts=$((attempts+1))
-        echo "Deploy attempt: $attempts"
-        # Use wrangler via npx; this will install if not present
-        if npx wrangler publish --env production; then
-          echo "Deploy succeeded"
-          break
-        fi
-        echo "Deploy failed (attempt=$attempts)."
-        if [ "$attempts" -lt "$max_attempts" ]; then
-          sleep $((delay * attempts))
-          echo "Retrying..."
-        else
-          echo "All deploy attempts failed." >&2
-          exit 1
-        fi
-      done
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'wrangler.toml'
+      - '.github/workflows/deploy-workers.yml'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Deploy to Cloudflare Workers (with retry)
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          attempts=0
+          max_attempts=3
+          delay=5
+          until [ "$attempts" -ge "$max_attempts" ]; do
+            attempts=$((attempts+1))
+            echo "Deploy attempt: $attempts"
+            if npx wrangler publish --env production; then
+              echo "Deploy succeeded"
+              break
+            fi
+            echo "Deploy failed (attempt=$attempts)."
+            if [ "$attempts" -lt "$max_attempts" ]; then
+              sleep $((delay * attempts))
+              echo "Retrying..."
+            else
+              echo "All deploy attempts failed." >&2
+              exit 1
+            fi
+          done
